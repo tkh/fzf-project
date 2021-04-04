@@ -1,5 +1,7 @@
+let s:gitAutoRoot = get(g:, 'fzfSwitchProjectGitAutoRoot', 1)
+
 function! fzfproject#autoroot#switchroot()
-  if getbufinfo('%')[0]['listed'] && filereadable(@%)
+  if getbufinfo('%')[0]['listed'] && filereadable(@%) && s:gitAutoRoot
     call fzfproject#autoroot#doroot()
   endif
 endfunction

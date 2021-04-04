@@ -22,17 +22,17 @@ function! s:switchToFile(lines)
   endif
 endfunction
 
-function! fzfproject#find#file() 
-  let l:opts = { 
+function! fzfproject#find#file()
+  let l:opts = {
         \ 'sink*' : function('s:switchToFile'),
         \ 'down': '40%',
         \ 'options': [
         \ '--print-query',
         \ '--header', 'Choose existing file, or enter the name of a new file',
-        \ '--prompt', 'Filename> ' 
+        \ '--prompt', 'Filename> '
         \ ]
         \ }
-  if FugitiveIsGitDir(getcwd() . '/.git') 
+  if FugitiveIsGitDir(getcwd() . '/.git')
     let l:is_win = has('win32') || has('win64')
     let l:opts['source'] = s:listFilesCommand . (l:is_win ? '' : ' | uniq')
   endif

@@ -6,7 +6,7 @@ let s:projectDepth = get(g:, 'fzfSwitchProjectProjectDepth', 1)
 
 function! fzfproject#switch()
   let l:projects = s:getAllDirsFromWorkspaces(s:workspaces, 1)
-  let l:projects = l:projects + s:projects 
+  let l:projects = l:projects + s:projects
   let l:opts = {
     \ 'sink': function('s:switchToProjectDir'),
     \ 'source': s:formatProjectList(l:projects),
@@ -27,7 +27,7 @@ function! s:switchToProjectDir(projectLine)
     endif
 
     if s:chooseFile
-      call fzfproject#find#file() 
+      call fzfproject#find#file()
       " Fixes issue with NeoVim
       " See https://github.com/junegunn/fzf/issues/426#issuecomment-158115912
       if has("nvim") && !has("nvim-0.5.0")
@@ -74,15 +74,15 @@ function! s:formatProjectList(dirs)
     let dir = { 'name' : l:name, 'dir' : fnamemodify(dir, ':h') }
     call add(l:dirParts, dir)
   endfor
-  return s:generateProjectListLines(l:dirParts, l:longest) 
+  return s:generateProjectListLines(l:dirParts, l:longest)
 endfunction
 
 function! s:generateProjectListLines(dirParts, longest)
   let l:outputLines = [  ]
   for dir in a:dirParts
     let l:padding = a:longest - len(dir['name'])
-    let l:line = dir['name'] 
-          \ . repeat(' ', l:padding) 
+    let l:line = dir['name']
+          \ . repeat(' ', l:padding)
           \ . ' ' . dir['dir']
     call add(l:outputLines, l:line)
   endfor

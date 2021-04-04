@@ -1,4 +1,3 @@
-
 augroup projectSwitcher
   autocmd!
   autocmd BufEnter * call fzfproject#autoroot#switchroot()
